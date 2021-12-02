@@ -1,6 +1,7 @@
 package fr.lernejo.tester.internal;
 
 import fr.lernejo.tester.SomeLernejoTests;
+import fr.lernejo.tester.api.TestMethod;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
 
@@ -13,13 +14,11 @@ public class TestClassDescriptionLernejoTests {
         public static void main(String[] args) {
             TestClassDescription testClassDescription = new TestClassDescription(SomeLernejoTests.class);
             List<Method> listMethod = testClassDescription.listTestMethods();
-            for(Method test : listMethod){
-                System.out.println(test);
-            }
+
 
         }
-        @Test
-        void list_Methods_Test() throws NoSuchMethodException {
+        @TestMethod
+        public void list_Methods_Test() throws NoSuchMethodException {
             TestClassDescription testClassDescription = new TestClassDescription(SomeLernejoTests.class);
             SomeLernejoTests someLernejoTests = new SomeLernejoTests();
             List<Method> result = testClassDescription.listTestMethods();
@@ -27,6 +26,6 @@ public class TestClassDescriptionLernejoTests {
             ListMethod.add(someLernejoTests.getClass().getMethod("ok", null));
             ListMethod.add(someLernejoTests.getClass().getMethod("ko", null));
             Assertions.assertThat(result).as("contains ok and ko")
-                .isEqualTo(ListMethod); // (3)
+                .isEqualTo(ListMethod);
         }
 }
